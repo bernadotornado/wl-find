@@ -1,3 +1,1 @@
-mkdir -p build
-g++ find-path.cpp -o build/find-path
-./build/find-path docs/wien.map $1 $2
+mkdir -p build && g++ find-path.cpp -o build/find-path && ./build/find-path docs/wien.map $1 $2

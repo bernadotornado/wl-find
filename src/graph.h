@@ -2,17 +2,35 @@
 #include <string>
 #include <vector>
 typedef std::string StationName;
+class Connection;
 class Station{
     public:
+        int id;
         StationName station_name;
-        int distance;
-        std::vector<Station*> connections;
-        Station();
+        std::vector<Connection*> connections;
+        Station(StationName station_name);
+        void AddConnection(Station *to, int distance);
 };
-
+class Connection{
+    public:
+        Station *from;
+        Station *to;
+        int distance;
+        Connection();
+};
+class Line{
+    public:
+        std::string line_name;
+        Station *root;
+        Station *tail;
+        Line(std::string line_name);
+};
 class Map{
     public:
-        void AddLine(std::string line);
-        void AddStation(StationName station_name);
+        std::vector<Station*> stations;
+        std::vector<Line*> lines;
+        Map();
+        void AddLine(Line *line);
+        void AddStation(Station *station);
         void AddConnection(StationName from, StationName to, int distance);
 };
