@@ -21,9 +21,13 @@ Line::Line(std::string line_name)
     this->root = NULL;
     this->tail = NULL;
 }
+int Map::GetStationID(StationName station){
+    return this->stationLookup[station];
+}
 void Map::AddStation(Station *station)
-{
+{   
     // Add a station to the map
+    
     this->stations.push_back(station);
 }
 void Map::AddLine(Line *line)

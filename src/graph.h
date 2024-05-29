@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 typedef std::string StationName;
 class Connection;
 class Station{
@@ -26,10 +27,13 @@ class Line{
         Line(std::string line_name);
 };
 class Map{
+    private:
+        std::map<StationName, int> stationLookup;
     public:
         std::vector<Station*> stations;
         std::vector<Line*> lines;
         Map();
+        int GetStationID(StationName station);
         void AddLine(Line *line);
         void AddStation(Station *station);
         void AddConnection(StationName from, StationName to, int distance);

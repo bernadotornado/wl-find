@@ -43,9 +43,16 @@ int main(int argc, char *argv[])
              int length = line.length();
             for (int i = 0; i < length; i++)
             {
+                if(line[i] == '\r' || line[i] == '\n'){
+                        current_distance = 0;
+                        current_line = NULL;
+                        current_station = NULL;
+                        current_token = "";
+                        state = FIND_LINE;
+                        break;
+                }
                 if (state == FIND_LINE)
                 {
-                    current_token += line[i];
                     if (line[i] == ':')
                     {
                         Line *new_line = new Line(current_token);
@@ -56,6 +63,7 @@ int main(int argc, char *argv[])
                         state = FIND_STATIONS;
                         continue;
                     }
+                    current_token += line[i];
                     continue;
                 }
                 if (state == FIND_STATIONS)
@@ -88,6 +96,7 @@ int main(int argc, char *argv[])
                     continue;
                 }
                 if(state == FIND_DISTANCE){
+                    
                     if(line[i] != ' '){
                         current_distance = line[i] - '0';
                         cout << "Distance: " << current_distance <<  endl;
@@ -96,16 +105,12 @@ int main(int argc, char *argv[])
                     }
                     continue;
                 }
-                if(i == length - 1){
-                    current_line = NULL;
-                }
+                
             }
         }
         for(auto i: map->lines){
             cout << i->line_name << endl;
-        }
-        for(auto i: map->stations){
-            cout << i->station_name << endl;
+            
         }
 
         map_file.close();
