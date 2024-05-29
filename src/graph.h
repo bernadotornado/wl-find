@@ -19,7 +19,9 @@ class Line{
         std::string line_name;
         Station *root;
         Station *tail;
+        void PrintLine();
         Line(std::string line_name);
+
 };
 class Connection{
     public:
@@ -27,6 +29,7 @@ class Connection{
         Station *to;
         int distance;
         Line *line;
+        void PrintConnection();
         Connection(Station *from, Station *to, Line *line, int distance);
 };
 
@@ -43,5 +46,6 @@ class Map{
         void     AddLine(Line *line);
         Station* AddStation(Station *station);
         void     AddConnection(StationName from, StationName to, int distance);
+        void     PrintMap();
         Map();
 };
