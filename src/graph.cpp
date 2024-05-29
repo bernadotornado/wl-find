@@ -24,11 +24,26 @@ Line::Line(std::string line_name)
 int Map::GetStationID(StationName station){
     return this->stationLookup[station];
 }
-void Map::AddStation(Station *station)
+int Map::Enumerate(){
+    return this->curr_id++;
+}
+Station* Map::GetStationByID(int id){
+    return stations[id];
+}
+Station* Map::AddStation(Station *station)
 {   
     // Add a station to the map
-    
-    this->stations.push_back(station);
+    if(this->stationLookup.find(station->station_name) == stationLookup.end()){
+        int id = Enumerate();
+        stationLookup[station->station_name] = id;
+        this->stations.push_back(station);
+        station->id = id;
+        return station;
+    }
+    else {
+        int id = GetStationID(station->station_name);
+        return GetStationByID(id);
+    }
 }
 void Map::AddLine(Line *line)
 {
