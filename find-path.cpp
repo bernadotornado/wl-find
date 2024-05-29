@@ -4,7 +4,15 @@
 #include <vector>
 #include "src/graph.cpp"
 #include "src/parser.h"
+#include "src/debug.h"
 using namespace std;
+
+void Debug_Print(Map *map){
+    for(auto station: map->stations){
+        station->PrintStation();
+    }
+}
+
 int main(int argc, char *argv[])
 {
     if (argc != 4)
@@ -27,11 +35,9 @@ int main(int argc, char *argv[])
     auto endStation = map->GetStationID(destination);
 
     cout << "Start ID: " << startStation << "\nDestination ID: " << endStation <<endl;
-    for(auto station: map->stations){
-        cout << "Station: " << station->station_name << " ID: " << station->id << endl;
-        for (auto connection: station->connections){
-            cout << "Connection: " << connection->from->station_name << " -> " << connection->to->station_name << " Distance: " << connection->distance << endl;
-        }
-    }
+    #if DEBUG
+    Debug_Print(map);
+    #endif
     return 0;
 }
+

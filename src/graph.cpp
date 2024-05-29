@@ -7,12 +7,13 @@ Map::Map()
     this->stations = std::vector<Station*>();
     this->lines = std::vector<Line*>();
 }
-Connection::Connection()
+Connection::Connection(Station *from, Station *to, Line *line, int distance)
 {
     // Initialize the connection
-    this->from = NULL;
-    this->to = NULL;
-    this->distance = 0;
+    this->from = from;
+    this->to = to;
+    this->distance = distance;
+    this->line = line;
 }
 Line::Line(std::string line_name)
 {
@@ -45,11 +46,36 @@ Station* Map::AddStation(Station *station)
         return GetStationByID(id);
     }
 }
+void Station::PrintStation(){
+    std::cout << "Station: " << this->station_name << " ID: " << this->id << std::endl;
+    for (auto connection: this->connections){
+        std::cout 
+        << "    Connection: " 
+        << connection->from->station_name 
+        << " -> " 
+        << connection->to->station_name 
+        << std::endl
+        << "    Line: "
+        << connection->line->line_name
+        << " ("
+        << connection->line->root->station_name
+        << " -> "
+        << connection->line->tail->station_name
+        << ")"
+        << std::endl
+        << "    Distance: " 
+        << connection->distance 
+        << std::endl
+        << std::endl
+        ;
+    }
+}
 void Map::AddLine(Line *line)
 {
     // Add a line to the map
     this->lines.push_back(line);
 }
+
 
 Station::Station(StationName station_name)
 {
@@ -57,12 +83,8 @@ Station::Station(StationName station_name)
     this->station_name = station_name;
     this->connections = std::vector<Connection*>();
 }
-void Station::AddConnection(Station *to, int distance)
+void Station::AddConnection(Connection *connection)
 {
     // Add a connection to the station
-    Connection *connection = new Connection();
-    connection->from = this;
-    connection->to = to;
-    connection->distance = distance;
     this->connections.push_back(connection);
 }

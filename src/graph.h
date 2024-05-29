@@ -10,15 +10,9 @@ class Station{
         int id;
         StationName station_name;
         std::vector<Connection*> connections;
+        void AddConnection(Connection *connection);
+        void PrintStation();
         Station(StationName station_name);
-        void AddConnection(Station *to, int distance);
-};
-class Connection{
-    public:
-        Station *from;
-        Station *to;
-        int distance;
-        Connection();
 };
 class Line{
     public:
@@ -27,6 +21,15 @@ class Line{
         Station *tail;
         Line(std::string line_name);
 };
+class Connection{
+    public:
+        Station *from;
+        Station *to;
+        int distance;
+        Line *line;
+        Connection(Station *from, Station *to, Line *line, int distance);
+};
+
 class Map{
     private:
         int curr_id = 0;
@@ -35,10 +38,10 @@ class Map{
     public:
         std::vector<Station*> stations;
         std::vector<Line*> lines;
-        Map();
         Station* GetStationByID(int id);
-        int GetStationID(StationName station);
-        void AddLine(Line *line);
+        int      GetStationID(StationName station);
+        void     AddLine(Line *line);
         Station* AddStation(Station *station);
-        void AddConnection(StationName from, StationName to, int distance);
+        void     AddConnection(StationName from, StationName to, int distance);
+        Map();
 };

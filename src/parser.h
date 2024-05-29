@@ -74,9 +74,15 @@ Map *ParseFile(std::string map_path)
                         station = map->AddStation(station);
                         if (current_station != NULL)
                         {
-                            current_station->AddConnection(station, current_distance);
+                            Connection *connection = new Connection(current_station, station, current_line, current_distance);
+                            current_station->AddConnection(connection);
+                            station->AddConnection(connection);
                             current_distance = 0;
                         }
+                        if(current_line->root == NULL){
+                            current_line->root = station;
+                        }
+                        current_line->tail = station;
                         cout << "Station: " << current_token << endl;
                         current_station = station;
                         
