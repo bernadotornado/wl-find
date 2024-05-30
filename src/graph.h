@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 typedef std::string StationName;
+typedef int StationID;
 class Connection;
 class Station{
     public:
@@ -46,6 +47,7 @@ class Map{
         void     AddLine(Line *line);
         Station* AddStation(Station *station);
         void     AddConnection(StationName from, StationName to, int distance);
+        void     FindPath(StationID from, StationID to);
         void     PrintMap();
         Map();
 };

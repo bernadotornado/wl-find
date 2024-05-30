@@ -13,10 +13,6 @@ using namespace std;
 
 void Debug_Print(Map *map)
 {
-    for (auto station : map->stations)
-    {
-        station->PrintStation();
-    }
     map->PrintMap();
 }
 
@@ -43,10 +39,19 @@ int main(int argc, char *argv[])
     }
     int startStationID = map->GetStationID(start);
     int endStationID = map->GetStationID(destination);
+    if(startStationID == -1){
+        cerr << "Error: Station '"<< start << "' not found in map" << endl;
+        return 1;
+    }
+    if(endStationID == -1){
+        cerr << "Error: Station '"<< destination << "' not found in map" << endl;
+        return 1;
+    }
 
 #if DEBUG
-    cout << "Start ID: " << startStationID << "\nDestination ID: " << endStationID << endl;
     Debug_Print(map);
+    cout << "Start ID: " << startStationID << "\nDestination ID: " << endStationID << endl;
 #endif
+    map->FindPath(startStationID, endStationID);
     return 0;
 }
