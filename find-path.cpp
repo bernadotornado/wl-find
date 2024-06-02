@@ -11,11 +11,6 @@
 #include "src/debug.h"
 using namespace std;
 
-/*void Debug_Print(Map *map)
-{
-    map->PrintMap();
-}*/
-
 int main(int argc, char *argv[])
 {
     // Check for the correct number of arguments

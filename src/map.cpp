@@ -6,7 +6,7 @@
 #include <climits>
 #include <algorithm>
 #include <queue>
-#include <utility> // For std::pair
+#include <utility>
 
 Map::Map()
 {
@@ -26,7 +26,6 @@ void Map::PrintMap(){
 
 void Map::AddLine(Line *line)
 {
-    // Add a line to the map
     this->lines.push_back(line);
 }
 
