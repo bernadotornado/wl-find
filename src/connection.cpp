@@ -7,12 +7,13 @@ Connection::Connection(Station *from, Station *to, Line *line, int distance)
     this->distance = distance;
     this->line = line;
 }
+
 void Connection::PrintConnection(){
-    std::cout 
-    << "Connection: " 
-    << this->from->station_name 
-    << " -> " 
-    << this->to->station_name 
+    std::cout
+    << "Connection: "
+    << this->from->station_name
+    << " -> "
+    << this->to->station_name
     << std::endl
     << "Line: "
     << this->line->line_name
@@ -22,8 +23,8 @@ void Connection::PrintConnection(){
     << this->line->tail->station_name
     << ")"
     << std::endl
-    << "Distance: " 
-    << this->distance 
+    << "Distance: "
+    << this->distance
     << std::endl
     << std::endl
     ;

@@ -11,22 +11,26 @@
 #include "src/debug.h"
 using namespace std;
 
-void Debug_Print(Map *map)
+/*void Debug_Print(Map *map)
 {
     map->PrintMap();
-}
+}*/
 
 int main(int argc, char *argv[])
 {
+    // Check for the correct number of arguments
     if (argc != 4)
     {
         cerr << "Usage: " << argv[0] << " <map> <start> <destination>" << endl;
         return 1;
     }
+
     // Parse the command line arguments
     string map_path = argv[1];
     string start = argv[2];
     string destination = argv[3];
+
+	// Print the command line arguments
     cout << "Map: " << map_path << endl;
     cout << "Start: " << start << endl;
     cout << "Destination: " << destination << endl;

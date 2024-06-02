@@ -1,6 +1,5 @@
 #include "graph.h"
 
-
 Station::Station(StationName station_name)
 {
     // Initialize the station
@@ -10,10 +9,8 @@ Station::Station(StationName station_name)
 
 void Station::PrintStation(){
     std::cout << "Station: " << this->station_name << " ID: " << this->id << std::endl;
-    for (auto connection: this->connections){
-        connection->PrintConnection();
-    }
 }
+
 void Station::AddConnection(Connection *connection)
 {
     // Add a connection to the station

@@ -3,8 +3,10 @@
 #include <string>
 #include <vector>
 #include <map>
+
 typedef std::string StationName;
 typedef int StationID;
+
 class Connection;
 class Station{
     public:

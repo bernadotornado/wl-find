@@ -1,7 +1,5 @@
 #include "graph.h"
 
-
-
 Line::Line(std::string line_name)
 {
     // Initialize the line

@@ -70,7 +70,7 @@ Map *ParseFile(std::string map_path)
                 if (state == FIND_STATIONS)
                 {
                     if (NEXT_QUOTE)
-                    {   
+                    {
                         // Move to the next state after finding the quote token
                         state = OPEN_QUOTE;
                         continue;
