@@ -63,24 +63,29 @@ Station* Map::AddStation(Station *station)
 void Map::Dijkstra(StationID from, StationID to){
     std::cout << "Finding path from " << this->stations[from]->station_name << " to " << this->stations[to]->station_name << std::endl;
 
-    // Using a priority queue to store the minimum distance
+    // priority queue to store the minimum distance
     std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> pq;
     std::vector<int> dist(this->stations.size(), INT_MAX);
     std::vector<int> prev(this->stations.size(), -1);
 
+	// set distance to the source station to 0
     dist[from] = 0;
     pq.push(std::make_pair(0, from));
 
+	// process nodes until queue is empty
     while (!pq.empty()) {
         int u = pq.top().second;
         pq.pop();
 
         if (u == to) break; // Found the shortest path to the destination
 
+	    // iterate over the connections of the current station
         for (auto connection: this->stations[u]->connections) {
             int v = GetStationID(connection->to->station_name);
             int weight = connection->distance;
+			// compare distance of current station and weight of connection with distance of next station
             if (dist[u] + weight < dist[v]) {
+				// update distance and add station to queue
                 dist[v] = dist[u] + weight;
                 pq.push(std::make_pair(dist[v], v));
                 prev[v] = u;
@@ -95,15 +100,16 @@ void Map::Dijkstra(StationID from, StationID to){
     }
     std::reverse(path.begin(), path.end());
 
+	// print the path
     int totalTime = 0;
     if (path[0] == from) {
         for (size_t i = 0; i < path.size(); ++i) {
-            this->stations[path[i]]->PrintStation();
+            this->stations[path[i]]->PrintStation(); // print every station
             if (i != path.size() - 1) {
                 for (auto connection: this->stations[path[i]]->connections) {
                     if (connection->to->id == path[i + 1]) {
                         connection->PrintConnection();
-                        totalTime += connection->distance;
+                        totalTime += connection->distance; // add the distance to the total time
 
                         // Check for line transfer
                         if (i > 0) {
@@ -132,18 +138,21 @@ void Map::BFS(StationID from, StationID to) {
     std::vector<bool> visited(this->stations.size(), false);
     std::vector<int> prev(this->stations.size(), -1);
 
-    // Initialize BFS
     q.push(from);
     visited[from] = true;
 
+	// while the queue is not empty - dequeue the front node and enqueue its neighbour nodes
     while (!q.empty()) {
         int u = q.front();
         q.pop();
 
         if (u == to) break; // Found the path to the destination
 
+		// iterate over the connections of the current station
         for (auto connection: this->stations[u]->connections) {
             int v = GetStationID(connection->to->station_name);
+
+			// mark node as visited and enqueue it
             if (!visited[v]) {
                 q.push(v);
                 visited[v] = true;
@@ -157,17 +166,19 @@ void Map::BFS(StationID from, StationID to) {
     for (int at = to; at != -1; at = prev[at]) {
         path.push_back(at);
     }
+
     std::reverse(path.begin(), path.end());
 
+ 	// print the path
     if (path[0] == from) {
         int totalTime = 0;
         for (size_t i = 0; i < path.size(); ++i) {
-            this->stations[path[i]]->PrintStation();
+            this->stations[path[i]]->PrintStation(); // print every station
             if (i != path.size() - 1) {
                 for (auto connection: this->stations[path[i]]->connections) {
                     if (connection->to->id == path[i + 1]) {
                         connection->PrintConnection();
-                        totalTime += connection->distance;
+                        totalTime += connection->distance; // add the distance to the total time
 
                         // Check for line transfer
                         if (i > 0) {
