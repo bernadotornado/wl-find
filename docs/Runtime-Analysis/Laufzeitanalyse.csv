@@ -1,0 +1,10 @@
+﻿Test;No. Lines;Benchmark #1 (ms);Benchmark #2 (ms);Benchmark #3 (ms);Avg.;Delta
+Heiligenstadt-Hütteldorf;35;8,9581;5,4639;5,0503;6,4908;0,0000
+Heiligenstadt-Hütteldorf;10;7,7781;2,8886;2,9136;4,5268;1,9640
+Heiligenstadt-Hütteldorf;5;6,9616;2,0286;2,0289;3,6730;2,8177
+Taborstrasse-Hofwiesengasse;35;5,6394;5,4360;6,1130;5,7295;0,0000
+Taborstrasse-Hofwiesengasse;10;7,4475;3,0726;2,9142;4,4781;1,2514
+Taborstrasse-Hofwiesengasse;5;6,2272;1,7046;1,7052;3,2123;2,5171
+Leopoldau-Jaegerstrasse;35;2,3174;2,0216;2,2132;2,1841;0,0000
+Leopoldau-Jaegerstrasse;10;2,6589;2,4095;2,5306;2,5330;-0,3489
+Leopoldau-Jaegerstrasse;5;2,8351;1,8160;1,9244;2,1918;-0,0078
