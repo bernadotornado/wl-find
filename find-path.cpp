@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <cctype>
 // #include "src/graph.cpp"
 #include "src/connection.cpp"
 #include "src/station.cpp"
@@ -37,8 +38,8 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-	string sort;
-	cout << "Which sorting algorithm would you like to use? (Type \"Dijkstra\" or \"BFS\") " << endl;
+	char sort;
+	cout << "Which sorting algorithm would you like to use? (Type \"D\" for Dijkstra or \"B\" for BFS) " << endl;
 	cin >> sort;
 
     int startStationID = map->GetStationID(start);
@@ -56,10 +57,10 @@ int main(int argc, char *argv[])
     Debug_Print(map);
     cout << "Start ID: " << startStationID << "\nDestination ID: " << endStationID << endl;
 #endif
-	if(sort == "Dijkstra"){
+	if(tolower(sort) == 'd'){
 		map->Dijkstra(startStationID, endStationID);
 	}
-	else if(sort == "BFS"){
+	else if(tolower(sort) == 'b'){
 		map->BFS(startStationID, endStationID);
 	}
 	else{
