@@ -54,7 +54,8 @@ class Map{
         void     AddLine(Line *line);
         Station* AddStation(Station *station);
         void     AddConnection(StationName from, StationName to, int distance);
-        void     FindPath(StationID from, StationID to);
+        void     Dijkstra(StationID from, StationID to);
+        void     BFS(StationID from, StationID to);
         void     PrintMap();
         Map();
 };
