@@ -1,3 +1,5 @@
+#define TRUE 1
+#define FALSE 0
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -8,7 +10,7 @@
 #include "src/line.cpp"
 #include "src/map.cpp"
 #include "src/parser.h"
-#include "src/debug.h"
+#include "config/config.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -37,9 +39,15 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+#if DEFAULT_DIJKSTRA
+    string sort = "Dijkstra";
+#elif DEFAULT_BFS
+    string sort = "BFS";
+#else
 	string sort;
 	cout << "Which sorting algorithm would you like to use? (Type \"Dijkstra\" or \"BFS\") " << endl;
 	cin >> sort;
+#endif
 
     int startStationID = map->GetStationID(start);
     int endStationID = map->GetStationID(destination);
