@@ -4,14 +4,13 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <cctype>
-// #include "src/graph.cpp"
 #include "src/connection.cpp"
 #include "src/station.cpp"
 #include "src/line.cpp"
 #include "src/map.cpp"
 #include "src/parser.h"
 #include "config/config.h"
+#include "debug/stopwatch.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -32,6 +31,10 @@ int main(int argc, char *argv[])
     cout << "Map: " << map_path << endl;
     cout << "Start: " << start << endl;
     cout << "Destination: " << destination << endl;
+
+    #if DEBUG
+    Stopwatch stopwatch;
+    #endif
     // Parse the map file
     Map *map = ParseFile(map_path);
     if (map == NULL)
@@ -62,7 +65,6 @@ int main(int argc, char *argv[])
     }
 
 #if DEBUG
-    Debug_Print(map);
     cout << "Start ID: " << startStationID << "\nDestination ID: " << endStationID << endl;
 #endif
 	if(tolower(sort) == 'd'){
@@ -74,5 +76,8 @@ int main(int argc, char *argv[])
 	else{
 		cout << "Invalid sorting algorithm" << endl;
 	}
+    #if DEBUG
+    cout << "Elapsed time: " << stopwatch.elapsed_time() << "ms" << endl;
+    #endif
     return 0;
 }
