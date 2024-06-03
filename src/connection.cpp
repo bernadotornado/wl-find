@@ -29,3 +29,7 @@ void Connection::PrintConnection(){
     << std::endl
     ;
 }
+
+Connection *Connection::Reverse(){
+    return new Connection(this->to, this->from, this->line, this->distance);
+}

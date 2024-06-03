@@ -31,8 +31,10 @@ class Connection{
         Station *from;
         Station *to;
         int distance;
+        // TODO: account for multiple lines
         Line *line;
         void PrintConnection();
+        Connection *Reverse();
         Connection(Station *from, Station *to, Line *line, int distance);
 };
 

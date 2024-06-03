@@ -89,7 +89,9 @@ Map *ParseFile(std::string map_path)
                             // Create a new connection between the current station and the new station
                             Connection *connection = new Connection(current_station, station, current_line, current_distance);
                             current_station->AddConnection(connection);
+                            current_station->AddConnection(connection->Reverse());
                             station->AddConnection(connection);
+                            station->AddConnection(connection->Reverse());
                             current_distance = 0;
                         }
                         // Set the root of the line if it is not set
