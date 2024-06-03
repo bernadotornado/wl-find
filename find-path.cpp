@@ -36,6 +36,11 @@ int main(int argc, char *argv[])
         // Exit with an error if the map is invalid
         return 1;
     }
+
+	string sort;
+	cout << "Which sorting algorithm would you like to use? (Type \"Dijkstra\" or \"BFS\") " << endl;
+	cin >> sort;
+
     int startStationID = map->GetStationID(start);
     int endStationID = map->GetStationID(destination);
     if(startStationID == -1){
@@ -51,6 +56,14 @@ int main(int argc, char *argv[])
     Debug_Print(map);
     cout << "Start ID: " << startStationID << "\nDestination ID: " << endStationID << endl;
 #endif
-    map->FindPath(startStationID, endStationID);
+	if(sort == "Dijkstra"){
+		map->Dijkstra(startStationID, endStationID);
+	}
+	else if(sort == "BFS"){
+		map->BFS(startStationID, endStationID);
+	}
+	else{
+		cout << "Invalid sorting algorithm" << endl;
+	}
     return 0;
 }

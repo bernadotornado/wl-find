@@ -60,7 +60,7 @@ Station* Map::AddStation(Station *station)
     }
 }
 
-void Map::FindPath(StationID from, StationID to){
+void Map::Dijkstra(StationID from, StationID to){
     std::cout << "Finding path from " << this->stations[from]->station_name << " to " << this->stations[to]->station_name << std::endl;
 
     // Using a priority queue to store the minimum distance
@@ -97,6 +97,70 @@ void Map::FindPath(StationID from, StationID to){
 
     int totalTime = 0;
     if (path[0] == from) {
+        for (size_t i = 0; i < path.size(); ++i) {
+            this->stations[path[i]]->PrintStation();
+            if (i != path.size() - 1) {
+                for (auto connection: this->stations[path[i]]->connections) {
+                    if (connection->to->id == path[i + 1]) {
+                        connection->PrintConnection();
+                        totalTime += connection->distance;
+
+                        // Check for line transfer
+                        if (i > 0) {
+                            for (auto prevConnection: this->stations[path[i-1]]->connections) {
+                                if (prevConnection->to->id == path[i] && prevConnection->line != connection->line) {
+                                    std::cout << "Change trains from line " << prevConnection->line->line_name << " to line " << connection->line->line_name << std::endl;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        std::cout << "Total travel time: " << totalTime << " minutes" << std::endl;
+    } else {
+        std::cout << "No path found from " << this->stations[from]->station_name << " to " << this->stations[to]->station_name << std::endl;
+    }
+}
+
+void Map::BFS(StationID from, StationID to) {
+    std::cout << "Finding path from " << this->stations[from]->station_name << " to " << this->stations[to]->station_name << std::endl;
+
+    // Queue for BFS
+    std::queue<int> q;
+    std::vector<bool> visited(this->stations.size(), false);
+    std::vector<int> prev(this->stations.size(), -1);
+
+    // Initialize BFS
+    q.push(from);
+    visited[from] = true;
+
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+
+        if (u == to) break; // Found the path to the destination
+
+        for (auto connection: this->stations[u]->connections) {
+            int v = GetStationID(connection->to->station_name);
+            if (!visited[v]) {
+                q.push(v);
+                visited[v] = true;
+                prev[v] = u;
+            }
+        }
+    }
+
+    // Reconstruct the path
+    std::vector<int> path;
+    for (int at = to; at != -1; at = prev[at]) {
+        path.push_back(at);
+    }
+    std::reverse(path.begin(), path.end());
+
+    if (path[0] == from) {
+        int totalTime = 0;
         for (size_t i = 0; i < path.size(); ++i) {
             this->stations[path[i]]->PrintStation();
             if (i != path.size() - 1) {
