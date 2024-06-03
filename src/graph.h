@@ -8,13 +8,16 @@ typedef std::string StationName;
 typedef int StationID;
 
 class Connection;
+class Line;
 class Station{
     public:
         int id;
         StationName station_name;
         std::vector<Connection*> connections;
+        std::vector<Line*> lines;
         void AddConnection(Connection *connection);
         void PrintStation();
+        void AddLine(Line *line);
         Station(StationName station_name);
 };
 class Line{
