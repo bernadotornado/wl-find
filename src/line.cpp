@@ -1,6 +1,6 @@
 #include "graph.h"
 
-Line::Line(std::string line_name)
+Line::Line(std::string& line_name)
 {
     // Initialize the line
     this->line_name = line_name;
