@@ -106,7 +106,7 @@ void Map::Dijkstra(StationID from, StationID to){
             this->stations[path[i]]->PrintStation(); // print every station
             if (i != path.size() - 1) {
                 for (auto connection: this->stations[path[i]]->connections) {
-                    if (connection->to->id == path[i + 1]) {
+                    std::find_if (connection->to->id == path[i + 1]) {
                         connection->PrintConnection();
     					int totalTime = 0;
                         totalTime += connection->distance; // add the distance to the total time
@@ -176,7 +176,7 @@ void Map::BFS(StationID from, StationID to) {
             this->stations[path[i]]->PrintStation(); // print every station
             if (i != path.size() - 1) {
                 for (auto connection: this->stations[path[i]]->connections) {
-                    if (connection->to->id == path[i + 1]) {
+                    std::find_if (connection->to->id == path[i + 1]) {
                         totalTime += connection->distance; // add the distance to the total time
 
                         // Check for line transfer
