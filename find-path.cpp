@@ -13,7 +13,7 @@
 #include "debug/stopwatch.h"
 using namespace std;
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv const[])
 {
     // Check for the correct number of arguments
     if (argc != 4)
