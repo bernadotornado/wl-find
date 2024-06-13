@@ -101,7 +101,6 @@ void Map::Dijkstra(StationID from, StationID to){
     std::reverse(path.begin(), path.end());
 
 	// print the path
-    int totalTime = 0;
     if (path[0] == from) {
         for (size_t i = 0; i < path.size(); ++i) {
             this->stations[path[i]]->PrintStation(); // print every station
@@ -109,6 +108,7 @@ void Map::Dijkstra(StationID from, StationID to){
                 for (auto connection: this->stations[path[i]]->connections) {
                     if (connection->to->id == path[i + 1]) {
                         connection->PrintConnection();
+    					int totalTime = 0;
                         totalTime += connection->distance; // add the distance to the total time
 
                         // Check for line transfer
