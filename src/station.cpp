@@ -1,7 +1,7 @@
 #include "graph.h"
 #include <algorithm>
 
-Station::Station(StationName station_name)
+Station::Station(StationName& station_name)
 {
     // Initialize the station
     this->station_name = station_name;
