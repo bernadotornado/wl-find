@@ -26,8 +26,7 @@ void Connection::PrintConnection(){
     << "Distance: "
     << this->distance
     << std::endl
-    << std::endl
-    ;
+    << std::endl;
 }
 
 Connection *Connection::Reverse(){

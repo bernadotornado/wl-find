@@ -177,7 +177,6 @@ void Map::BFS(StationID from, StationID to) {
             if (i != path.size() - 1) {
                 for (auto connection: this->stations[path[i]]->connections) {
                     if (connection->to->id == path[i + 1]) {
-                        connection->PrintConnection();
                         totalTime += connection->distance; // add the distance to the total time
 
                         // Check for line transfer
@@ -188,6 +187,7 @@ void Map::BFS(StationID from, StationID to) {
                                 }
                             }
                         }
+                        connection->PrintConnection();
                         break;
                     }
                 }
